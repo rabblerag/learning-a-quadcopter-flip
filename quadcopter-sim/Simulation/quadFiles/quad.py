@@ -195,19 +195,19 @@ class Quadcopter:
         # State Derivative Vector
         # ---------------------------
         sdot     = np.zeros([21])
-        sdot[0]  = DynamicsDot[0]
-        sdot[1]  = DynamicsDot[1]
-        sdot[2]  = DynamicsDot[2]
-        sdot[3]  = DynamicsDot[3]
-        sdot[4]  = DynamicsDot[4]
-        sdot[5]  = DynamicsDot[5]
-        sdot[6]  = DynamicsDot[6]
-        sdot[7]  = DynamicsDot[7]
-        sdot[8]  = DynamicsDot[8]
-        sdot[9]  = DynamicsDot[9]
-        sdot[10] = DynamicsDot[10]
-        sdot[11] = DynamicsDot[11]
-        sdot[12] = DynamicsDot[12]
+        sdot[0]  = DynamicsDot[0, 0] # type: ignore
+        sdot[1]  = DynamicsDot[1, 0] # type: ignore
+        sdot[2]  = DynamicsDot[2, 0] # type: ignore
+        sdot[3]  = DynamicsDot[3, 0] # type: ignore
+        sdot[4]  = DynamicsDot[4, 0] # type: ignore
+        sdot[5]  = DynamicsDot[5, 0] # type: ignore
+        sdot[6]  = DynamicsDot[6, 0] # type: ignore
+        sdot[7]  = DynamicsDot[7, 0] # type: ignore
+        sdot[8]  = DynamicsDot[8, 0] # type: ignore
+        sdot[9]  = DynamicsDot[9, 0] # type: ignore
+        sdot[10] = DynamicsDot[10, 0] # type: ignore
+        sdot[11] = DynamicsDot[11, 0] # type: ignore
+        sdot[12] = DynamicsDot[12, 0] # type: ignore
         sdot[13] = wdotM1
         sdot[14] = wddotM1
         sdot[15] = wdotM2
@@ -227,7 +227,7 @@ class Quadcopter:
         prev_omega = self.omega
 
         self.integrator.set_f_params(cmd, wind)
-        self.state = self.integrator.integrate(t, t+Ts)
+        self.state = self.integrator.integrate(t+Ts)
 
         self.pos   = self.state[0:3]
         self.quat  = self.state[3:7]
